@@ -54,21 +54,7 @@ if __name__ == "__main__":
         cat_params, args.fold, X_train, y_train, X_test, 100
     )
 
-    xgb_params = {
-        "eta": 0.023839252347297356,
-        "reg_alpha": 6.99554614267605e-06,
-        "reg_lambda": 0.010419988953061583,
-        "max_depth": 15,
-        "max_leaves": 159,
-        "colsample_bytree": 0.4515469593932409,
-        "subsample": 0.7732694309118915,
-        "min_child_weight": 5,
-        "gamma": 0.6847131315687576,
-        "random_state": 42,
-        "n_estimators": 10000,
-        "objective": "binary:logistic",
-        "eval_metric": "auc",
-    }
+    xgb_params = pd.read_pickle("../../parameters/best_xgb_params.pkl")
     xgb_oof, xgb_preds = stratified_kfold_xgb(
         xgb_params, args.fold, X_train, y_train, X_test, 100
     )

@@ -17,12 +17,15 @@
 + benign_malignant - 악성인지 음성인지 유무
 + target - benign_malignant의 이진화(음성-0, 악성-1)
 
+## Hyperparameter Tunning 전략
++ Bayesian TPE 방식으로 빠르게 하이퍼파라미터 튜닝 -> AutoML로 접근
+
 ## BenchMark
 |model|OOF(5-fold)|OOF(10-fold)|
 |:-----|:---------|:--------|
-|LightGBM(before hp)|0.85585|0.85472|
-|LightGBM(after hp)|0.85188|0.86138|
-|CatBoost(before hp)|0.84594|0.84606|
-|CatBoost(after hp)|0.84360|0.84485|
-|XGBoost(before hp)|0.85893|0.86022|
-|XGBoost(after hp)|-|-|
+|LightGBM(before hyper parameter tunning)|0.85585|0.85472|
+|LightGBM(after hyper parameter tunning)|0.85188|0.86138|
+|CatBoost(before hyper parameter tunning)|0.84594|0.84606|
+|CatBoost(after hyper parameter tunning)|0.84360|0.84485|
+|XGBoost(before hyper parameter tunning)|0.85893|0.86022|
+|XGBoost(after hyper parameter tunning)|0.84347|0.84470|
