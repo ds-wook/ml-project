@@ -13,22 +13,22 @@ from model.gbdt import stratified_kfold_cat
 path = "../../input/siim-isic-melanoma-classification/"
 train = load_dataset(path)
 
-features = [
+features = features = [
     "age_approx",
     "age_enc",
-    "age_approx_mean_enc",
+    # "age_approx_mean_enc",
     "age_id_min",
     "age_id_max",
     "sex_enc",
-    "sex_mean_enc",
+    # "sex_mean_enc",
     "anatom_enc",
-    "anatom_mean_enc",
+    # "anatom_mean_enc",
     "n_images",
-    "n_images_mean_enc",
+    # "n_images_mean_enc",
     "n_images_enc",
-    "image_size_scaled",
+    # "image_size_scaled",
     "image_size_enc",
-    "image_size_mean_enc",
+    # "image_size_mean_enc",
 ]
 
 X = train[features]
