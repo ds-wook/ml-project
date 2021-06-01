@@ -21,6 +21,7 @@
 + Bayesian TPE 방식으로 빠르게 하이퍼파라미터 튜닝 -> AutoML로 접근
 
 ## BenchMark
+### Tabular-learning
 |model|OOF(5-fold)|OOF(10-fold)|
 |:-----|:---------|:--------|
 |LightGBM(before hyper parameter tunning)|0.85585|0.85472|
@@ -29,10 +30,18 @@
 |CatBoost(after hyper parameter tunning)|0.84360|0.84485|
 |XGBoost(before hyper parameter tunning)|0.85893|0.86022|
 |XGBoost(after hyper parameter tunning)|0.84347|0.84705|
-|Efficent Net|-|0.89679|
-|Ensemble(0.9 * net + 0.1 * lgbm)|-|0.90098|
-|Ensemble(0.8 * net + 0.2 * lgbm)|-|0.90387|
-|Ensemble(0.7 * net + 0.3 * lgbm)|-|0.90577|
-|Ensemble(0.6 * net + 0.4 * lgbm)|-|**0.90650**|
-|Ensemble(0.5 * net + 0.5 * lgbm)|-|0.90614|
-|Ensemble(0.5 * net + 0.4 * lgbm + 0.1 * xgb)|-|0.90624|
+
+### Image-learning
+|model|Epoch 5|Epoch 10|
+|:-----|:---------|:--------|
+|Efficent Net|0.87646|**0.89759**|
+
+### Ensemble Model
+|model|ROC-AUC-Score|
+|:-----|:---------|
+|0.9 * Effinet + 0.1 * LGBM|0.90098|
+|0.8 * Effinet + 0.2 * LGBM|0.90387|
+|0.7 * Effinet + 0.3 * LGBM|0.90577|
+|0.6 * Effinet + 0.4 * LGBM|**0.90650**|
+|0.5 * Effinet + 0.5 * LGBM|0.90614|
+|0.5 * Effinet + 0.4 * LGBM + 0.1 * XGB|0.90624|
