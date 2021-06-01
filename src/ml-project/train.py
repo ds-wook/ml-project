@@ -49,7 +49,7 @@ if __name__ == "__main__":
         lgb_params, args.fold, X_train, y_train, X_test, 100
     )
 
-    eff_preds = pd.read_csv("../../submit/efficent_net.csv")["target"]
+    eff_preds = pd.read_csv("../../submit/submission.csv")["target"]
 
     # xgb_params = {
     #     "eta": 0.023839252347297356,
@@ -71,7 +71,7 @@ if __name__ == "__main__":
     #     xgb_params, args.fold, X_train, y_train, X_test, 100
     # )
 
-    y_preds = 0.5 * eff_preds + 0.4 * lgb_preds
+    y_preds = 0.5 * eff_preds + 0.5 * lgb_preds
     print("#### Scores ####")
     print(f"LGBM ROC-AUC Test Score: {roc_auc_score(y_test, lgb_preds):.5f}")
     # print(f"XGB ROC-AUC Test Score: {roc_auc_score(y_test, xgb_preds):.5f}")
