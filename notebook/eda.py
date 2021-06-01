@@ -168,3 +168,6 @@ def display_images(images: np.ndarray, title: Optional[str] = None):
         )
 
     plt.show()
+
+
+# %%
