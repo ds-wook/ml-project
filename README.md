@@ -24,8 +24,8 @@
 ### Tabular-learning
 |model|OOF(5-fold)|OOF(10-fold)|
 |:-----|:---------|:--------|
-|LightGBM(before hyper parameter tunning)|0.85585|0.85472|
-|LightGBM(after hyper parameter tunning)|0.85188|**0.86138**|
+|LightGBM(before hyper parameter tunning)|0.84585|0.84472|
+|LightGBM(after hyper parameter tunning)|0.85360|**0.85864**|
 |CatBoost(before hyper parameter tunning)|0.84594|0.84606|
 |CatBoost(after hyper parameter tunning)|0.84360|0.84485|
 |XGBoost(before hyper parameter tunning)|0.85893|0.86022|
@@ -39,8 +39,8 @@
 ### Ensemble Model
 |model|ROC-AUC-Score|
 |:-----|:---------|
-|0.9 * Effinet + 0.1 * LGBM|0.90053|
-|0.8 * Effinet + 0.2 * LGBM|0.90222|
-|0.7 * Effinet + 0.3 * LGBM|0.90278|
-|0.6 * Effinet + 0.4 * LGBM|0.90201|
+|0.9 * Effinet + 0.1 * LGBM|0.90042|
+|**0.8 * Effinet + 0.2 * LGBM**|**0.90172**|
+|0.7 * Effinet + 0.3 * LGBM|0.90158|
+|0.6 * Effinet + 0.4 * LGBM|0.90056|
 |0.5 * Effinet + 0.5 * LGBM|0.90052|

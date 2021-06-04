@@ -20,6 +20,7 @@ def load_dataset(path: str) -> pd.DataFrame:
     train["anatom_enc"] = label_enc.fit_transform(
         train.anatom_site_general_challenge.astype(str)
     )
+
     train["age_approx"] = train["age_approx"].fillna(
         train["age_approx"].mode().values[0]
     )
@@ -66,19 +67,6 @@ def load_dataset(path: str) -> pd.DataFrame:
     )
     train["age_approx_mean_enc"] = train["age_approx"].map(
         train.groupby(["age_approx"])["target"].mean()
-    )
-
-    train["sex_mean_enc"] = train.sex_enc.map(
-        train.groupby(["sex_enc"])["target"].mean()
-    )
-    train["n_images_mean_enc"] = train["n_images_enc"].map(
-        train.groupby(["n_images_enc"])["target"].mean()
-    )
-    train["image_size_mean_enc"] = train["image_size_enc"].map(
-        train.groupby(["image_size_enc"])["target"].mean()
-    )
-    train["anatom_mean_enc"] = train["anatom_enc"].map(
-        train.groupby(["anatom_enc"])["target"].mean()
     )
 
     return train
