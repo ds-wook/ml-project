@@ -34,7 +34,6 @@ plt.show()
 # %%
 path = "../input/siim-isic-melanoma-classification/"
 train = pd.read_csv(path + "train.csv")
-display(train.head())
 print("Shape of train :", train.shape)
 # %% [markdown]
 """

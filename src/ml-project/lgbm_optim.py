@@ -1,41 +1,23 @@
 import argparse
+from functools import partial
 
-import joblib
-import optuna
+import pandas as pd
 from optuna import Trial
-from optuna.samplers import TPESampler
 from sklearn.metrics import roc_auc_score
 from sklearn.model_selection import train_test_split
 
 from data.dataset import load_dataset
 from model.gbdt import stratified_kfold_lgbm
-
-path = "../../input/siim-isic-melanoma-classification/"
-train = load_dataset(path)
-
-features = [
-    "age_approx",
-    "age_enc",
-    "age_approx_mean_enc",
-    "age_id_min",
-    "age_id_max",
-    "sex_enc",
-    "anatom_enc",
-    "n_images",
-    "n_images_enc",
-    "image_size_scaled",
-    "image_size_enc",
-]
-
-X = train[features]
-y = train["target"]
-
-X_train, X_test, y_train, y_test = train_test_split(
-    X, y, test_size=0.2, random_state=42
-)
+from optim.bayesian import BayesianOptimizer
 
 
-def objective(trial: Trial) -> float:
+def lgbm_objective(
+    trial: Trial,
+    X_train: pd.DataFrame,
+    y_train: pd.Series,
+    X_test: pd.DataFrame,
+    args: int,
+) -> float:
     params_lgb = {
         "random_state": 42,
         "verbosity": -1,
@@ -55,31 +37,54 @@ def objective(trial: Trial) -> float:
         "max_bin": trial.suggest_int("max_bin", 200, 500),
     }
     lgb_oof, lgb_preds = stratified_kfold_lgbm(
-        params_lgb, args.fold, X_train, y_train, X_test
+        params_lgb, args, X_train, y_train, X_test
     )
     return roc_auc_score(y_train, lgb_oof)
 
 
-if __name__ == "__main__":
+def define_argparser():
     parse = argparse.ArgumentParser("Optimize")
     parse.add_argument("--fold", type=int, default=10)
     parse.add_argument("--trials", type=int, default=360)
     parse.add_argument("--params", type=str, default="params.pkl")
     args = parse.parse_args()
-    sampler = TPESampler(seed=42)
-    study = optuna.create_study(
-        study_name="lgbm_parameter_opt",
-        direction="maximize",
-        sampler=sampler,
+    return args
+
+
+def _main(args: argparse.Namespace):
+    path = "../../input/siim-isic-melanoma-classification/"
+    train = load_dataset(path)
+
+    features = [
+        "age_approx",
+        "age_enc",
+        "age_approx_mean_enc",
+        "age_id_min",
+        "age_id_max",
+        "sex_enc",
+        "anatom_enc",
+        "n_images",
+        "n_images_enc",
+        "image_size_scaled",
+        "image_size_enc",
+    ]
+
+    X = train[features]
+    y = train["target"]
+
+    X_train, X_test, y_train, y_test = train_test_split(
+        X, y, test_size=0.2, random_state=42
     )
-    study.optimize(objective, n_trials=args.trials)
-    print("Best Score:", study.best_value)
-    print("Best trial:", study.best_trial.params)
-    params = study.best_trial.params
-    params["random_state"] = 42
-    params["boosting_type"] = "gbdt"
-    params["learning_rate"] = 0.05
-    params["n_estimators"] = 10000
-    params["objective"] = "binary"
-    params["metric"] = "auc"
-    joblib.dump(params, "../../parameters/" + args.params)
+
+    objective = partial(
+        lgbm_objective, X_train=X_train, y_train=y_train, X_test=X_test, args=args.fold
+    )
+
+    bayesian_optim = BayesianOptimizer(objective)
+    study = bayesian_optim.build_study(trials=args.trials)
+    bayesian_optim.save_params(study, args.params)
+
+
+if __name__ == "__main__":
+    args = define_argparser()
+    _main(args)
