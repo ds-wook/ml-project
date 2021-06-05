@@ -36,9 +36,10 @@
     + 베이즈 최적화란 직전까지 계산한 매개변수에서의 결과에 기반을 두고 다음 탐색해야 할 매개변수를 베이즈 확률구조로 선택하는 방식
 + TPE
     + 기대향상(EI)은 어떤 매개변수로 모델의 점수를 계산 했을때 점수 계선량의 기댓값을 지금까지의 탐색 이력에 추정한 값이다.
-    + TPE(Tree-structured Parzen Estimator)는 기대 향샹의 계산에 필요한 $P(y|x, D_{n})$을 구하는 방법의 하나이다
+    + TPE(Tree-structured Parzen Estimator)는 기대 향샹의 계산에 필요한 ![CodeCogsEqn (1)](https://user-images.githubusercontent.com/46340424/120889562-c590c700-c638-11eb-9fbf-d127f4d42e71.gif)을 구하는 하나의 방법이다
     + 기대향상 수식
-    <a href="https://www.codecogs.com/eqnedit.php?latex=EI_{D_{n}}(x)&space;=&space;(\gamma&space;&plus;&space;\frac&space;{g(x|D_{n})}&space;{l(x|D_{n})}(1-\gamma))^{-1}&space;\left&space;\{{\gamma&space;y^*&space;-&space;\int_{-\infty}^{y^*}yP(y|D_{n})dy}&space;\right&space;\}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?EI_{D_{n}}(x)&space;=&space;(\gamma&space;&plus;&space;\frac&space;{g(x|D_{n})}&space;{l(x|D_{n})}(1-\gamma))^{-1}&space;\left&space;\{{\gamma&space;y^*&space;-&space;\int_{-\infty}^{y^*}yP(y|D_{n})dy}&space;\right&space;\}" title="EI_{D_{n}}(x) = (\gamma + \frac {g(x|D_{n})} {l(x|D_{n})}(1-\gamma))^{-1} \left \{{\gamma y^* - \int_{-\infty}^{y^*}yP(y|D_{n})dy} \right \}" /></a>
+        ![CodeCogsEqn](https://user-images.githubusercontent.com/46340424/120889548-b01b9d00-c638-11eb-9208-ecca8f311832.gif)
+
 
 ## BenchMark
 ### Tabular-learning
