@@ -1,4 +1,5 @@
 # %%
+
 import os
 from os import listdir
 from typing import Optional
@@ -7,7 +8,7 @@ import chart_studio.plotly as py
 import cufflinks
 import matplotlib.pyplot as plt
 import numpy as np
-import pandas as pd  # data processing, CSV file I/O (e.g. pd.read_csv)
+import pandas as pd
 import PIL
 import plotly.express as px
 import plotly.graph_objs as go
@@ -27,22 +28,25 @@ import seaborn as sns
 
 sns.set(style="whitegrid")
 
-# Suppress warnings
 import warnings
 
 warnings.filterwarnings("ignore")
 
 
-# Settings for pretty nice plots
 plt.style.use("fivethirtyeight")
 plt.show()
 
 
 # %%
+
 path = "../input/siim-isic-melanoma-classification/"
 train = pd.read_csv(path + "train.csv")
 print("Shape of train :", train.shape)
+
+
 # %% [markdown]
+
+
 """
 + image_name: 이미지 파일 이름.
 + patient_id: 환자 개인의 고유값.
@@ -52,10 +56,8 @@ print("Shape of train :", train.shape)
 + diagnosis: maligant의 진단명
 + benign_malignant: target값의 실제 명
 """
-# Missing values per column
-train.isna().sum()
-# %%
-# checking missing data
+
+# 결측값 확인
 total = train.isnull().sum().sort_values(ascending=False)
 percent = (train.isnull().sum() / train.isnull().count() * 100).sort_values(
     ascending=False

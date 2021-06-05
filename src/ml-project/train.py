@@ -5,7 +5,6 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 import seaborn as sns
-from mpl_toolkits.mplot3d import Axes3D
 from sklearn.decomposition import PCA
 from sklearn.metrics import roc_auc_score
 from sklearn.model_selection import train_test_split
@@ -20,9 +19,7 @@ warnings.filterwarnings("ignore")
 def define_argparser():
     parse = argparse.ArgumentParser("Training!")
     parse.add_argument("--fold", type=int, default=10)
-    parse.add_argument(
-        "--params", type=str, default="../../parameters/best_lgbm_params.pkl"
-    )
+    parse.add_argument("--params", type=str, default="best_lgbm_params.pkl")
     args = parse.parse_args()
     return args
 
@@ -62,35 +59,17 @@ def _main(args: argparse.Namespace):
     y_preds = 0.8 * eff_preds + 0.2 * lgb_preds
 
     X_test_scale = StandardScaler().fit_transform(X_test.values)
-    pca = PCA(n_components=3)
+    pca = PCA(n_components=2)
     pca.fit(X_test_scale)
     pca_test = pca.transform(X_test_scale)
-    pca_columns = ["pca_component1", "pca_component2", "pca_component3"]
+    pca_columns = ["pca_component1", "pca_component2"]
     pca_data = pd.DataFrame(pca_test, columns=pca_columns)
     pca_data["target"] = y_test
     pca_data["preds"] = np.where(y_preds > 0.2, 1, 0)
 
-    fig = plt.figure(figsize=(15, 15))
-    ax2 = fig.add_subplot(111, projection="3d")
-
-    ax2.set_xlabel("pca_component1", fontsize=15)
-    ax2.set_ylabel("pca_component2", fontsize=15)
-    ax2.set_zlabel("pca_component3", fontsize=15)
-    ax2.set_title("3 Component PCA", fontsize=20)
-
-    for label, color in zip([0, 1], ["green", "red"]):
-        indicesToKeep = pca_data["target"] == label
-        ax2.scatter(
-            pca_data.loc[indicesToKeep, "pca_component1"],
-            pca_data.loc[indicesToKeep, "pca_component2"],
-            pca_data.loc[indicesToKeep, "pca_component3"],
-            c=color,
-            s=30,
-        )
-
-    ax2.legend(["N", "Y"])
-    ax2.grid()
-    plt.savefig("../../graph/pca_3d.jpg")
+    plt.figure(figsize=(15, 15))
+    sns.scatterplot(x="pca_component1", y="pca_component2", hue="target", data=pca_data)
+    plt.savefig("../../graph/pca_figure.jpg")
     plt.close()
 
     print("#### Scores ####")
