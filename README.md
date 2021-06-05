@@ -39,7 +39,9 @@
     + TPE(Tree-structured Parzen Estimator)는 기대 향샹의 계산에 필요한 ![CodeCogsEqn (1)](https://user-images.githubusercontent.com/46340424/120889562-c590c700-c638-11eb-9fbf-d127f4d42e71.gif)을 구하는 하나의 방법이다
 
     + 기대향상 수식 및 코드 구현
+
         ![CodeCogsEqn](https://user-images.githubusercontent.com/46340424/120889548-b01b9d00-c638-11eb-9208-ecca8f311832.gif)
+        
         ```python
         from optuna.samplers import TPESampler
         import optuna
