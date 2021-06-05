@@ -1,5 +1,6 @@
 # %%
 import os
+from os import listdir
 from typing import Optional
 
 import chart_studio.plotly as py
@@ -10,8 +11,14 @@ import pandas as pd  # data processing, CSV file I/O (e.g. pd.read_csv)
 import PIL
 import plotly.express as px
 import plotly.graph_objs as go
+import pydicom
 from PIL import Image, ImageDraw
 from plotly.offline import iplot
+from scipy.stats import boxcox
+from skimage.io import imread
+from sklearn.cluster import KMeans
+from sklearn.mixture import GaussianMixture
+from sklearn.preprocessing import MinMaxScaler, StandardScaler
 
 cufflinks.go_offline()
 cufflinks.set_config_file(world_readable=True, theme="pearl")
@@ -168,5 +175,17 @@ def display_images(images: np.ndarray, title: Optional[str] = None):
 
     plt.show()
 
+
+# %%
+
+# %%
+
+
+listdir("../input/")
+# %%
+basepath = "../input/siim-isic-melanoma-classification/"
+train_image_path = basepath + "/jpeg/"
+some_files = listdir(train_image_path)[0:5]
+some_files
 
 # %%
