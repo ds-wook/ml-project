@@ -41,7 +41,7 @@
     + 기대향상 수식 및 코드 구현
 
         ![CodeCogsEqn](https://user-images.githubusercontent.com/46340424/120889548-b01b9d00-c638-11eb-9208-ecca8f311832.gif)
-        
+
         ```python
         from optuna.samplers import TPESampler
         import optuna
@@ -69,7 +69,7 @@
         ```
     + 실행 방법
     ```
-    python lgbm_optim.py --fold 10 --params best_lgbm.pkl --trials 350
+    python lgbm_optim.py --fold [fold의 수] --params [params 이름].pkl --trials [반복 수]
     ```
 ## Cross-Validation 전략
 + K-Fold의 문제점
@@ -82,7 +82,7 @@
 + Efficent-Net을 활용하여 이미지 데이터 학습
 + Boosting 모델을 학습 후 앙상블 진행
 ```
-python train.py --fold 10
+python train.py --fold [fold 수]
 ```
 ## BenchMark
 ### Tabular-learning

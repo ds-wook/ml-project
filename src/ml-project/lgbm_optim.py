@@ -26,7 +26,7 @@ def _main(args: argparse.Namespace):
         "age_approx_mean_enc",
         "age_id_min",
         "age_id_max",
-        "sex_enc",
+        # "sex_enc",
         "anatom_enc",
         "n_images",
         "n_images_enc",
@@ -38,7 +38,7 @@ def _main(args: argparse.Namespace):
     y = train["target"]
 
     X_train, X_test, y_train, y_test = train_test_split(
-        X, y, test_size=0.2, random_state=42, stratify=y
+        X, y, test_size=0.2, random_state=42
     )
 
     objective = partial(

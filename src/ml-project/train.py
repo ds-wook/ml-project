@@ -6,7 +6,7 @@ import numpy as np
 import pandas as pd
 import seaborn as sns
 from sklearn.decomposition import PCA
-from sklearn.metrics import roc_auc_score
+from sklearn.metrics import roc_auc_score, roc_curve
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 
@@ -58,18 +58,35 @@ def _main(args: argparse.Namespace):
 
     y_preds = 0.8 * eff_preds + 0.2 * lgb_preds
 
-    X_test_scale = StandardScaler().fit_transform(X_test.values)
-    pca = PCA(n_components=2)
-    pca.fit(X_test_scale)
-    pca_test = pca.transform(X_test_scale)
-    pca_columns = ["pca_component1", "pca_component2"]
-    pca_data = pd.DataFrame(pca_test, columns=pca_columns)
-    pca_data["target"] = y_test
-    pca_data["preds"] = np.where(y_preds > 0.2, 1, 0)
+    # X_test_scale = StandardScaler().fit_transform(X_test.values)
+    # pca = PCA(n_components=2)
+    # pca.fit(X_test_scale)
+    # pca_test = pca.transform(X_test_scale)
+    # pca_columns = ["pca_component1", "pca_component2"]
+    # pca_data = pd.DataFrame(pca_test, columns=pca_columns)
+    # pca_data["target"] = y_test
+    # pca_data["preds"] = np.where(y_preds > 0.2, 1, 0)
 
-    plt.figure(figsize=(15, 15))
-    sns.scatterplot(x="pca_component1", y="pca_component2", hue="target", data=pca_data)
-    plt.savefig("../../graph/pca_figure.jpg")
+    # plt.figure(figsize=(15, 15))
+    # sns.scatterplot(x="pca_component1", y="pca_component2", hue="target", data=pca_data)
+    # plt.savefig("../../graph/pca_figure.jpg")
+    # plt.close()
+    ns_probs = [0 for _ in range(len(y_test))]
+    ns_fpr, ns_tpr, _ = roc_curve(y_test, ns_probs)
+    lgb_fpr, lgb_tpr, _ = roc_curve(y_test, lgb_preds)
+    # plot the roc curve for the model
+    plt.plot(ns_fpr, ns_tpr, linestyle="--", label="No Skill")
+    plt.plot(lgb_fpr, lgb_tpr, marker=".", label="LGBM")
+
+    # axis labels
+    plt.xlabel("False Positive Rate")
+    plt.ylabel("True Positive Rate")
+
+    # show the legend
+    plt.legend()
+
+    # show the plot
+    plt.savefig("../../graph/lgbm_ROC.png")
     plt.close()
 
     print("#### Scores ####")
