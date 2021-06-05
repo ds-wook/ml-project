@@ -69,7 +69,7 @@
         ```
     + 실행 방법
     ```
-    python lgbm_optim.py --fold [fold의 수] --params [params 이름].pkl --trials [반복 수]
+    user $ python lgbm_optim.py --fold [fold의 수] --params [params 이름].pkl --trials [반복 수]
     ```
 ## Cross-Validation 전략
 + K-Fold의 문제점
@@ -82,7 +82,7 @@
 + Efficent-Net을 활용하여 이미지 데이터 학습
 + Boosting 모델을 학습 후 앙상블 진행
 ```
-python train.py --fold [fold 수]
+user $ python train.py --fold [fold 수]
 ```
 ## BenchMark
 ### Tabular-learning
