@@ -12,13 +12,33 @@
 + patient_id - 환자 고유 번호
 + sex - 성별
 + age_approx - 대략적인 나이
-+ anatom_site_general_challenge - 이미지의 위치
++ anatom_site_general_challenge - 흑색종의 위치
 + diagnosis - 진단명
 + benign_malignant - 악성인지 음성인지 유무
 + target - benign_malignant의 이진화(음성-0, 악성-1)
 
+### Feature Engineering
+##### meta data에 관하여 GBDT 모델을 사용하기 위해 Feature Engineering을 수행
++ sex_enc: 성별을 이진화
++ age_enc: 나이를 구간별로 나누어 label encoding함
++ age_approx_mean_enc: age_enc를 mean_encoding 함
++ anatom_enc: anatom_site_general_challenge를 label encoding함
++ n_images: image의 개수를 feature로 만듬
++ n_images_enc: n_images를 label encoding 함
++ image_size: image 크기를 feature로 만듬
++ image_size_scaled: image_size를 Min Max Scaler를 사용
++ image_size_enc: image_size를 categorize하여 label encoding을 수행
++ age_id_min: 환자의 id 중 나이가 가장 적은 값을 feature로 만듬
++ age_id_max: 환자의 id 중 나이가 가장 많은 사람을 feature로 만듬
+
 ## Hyperparameter Tunning 전략
-+ Bayesian TPE 방식으로 빠르게 하이퍼파라미터 튜닝 -> AutoML로 접근
++ 베이즈 최적화 이론
+    + 베이즈 최적화란 직전까지 계산한 매개변수에서의 결과에 기반을 두고 다음 탐색해야 할 매개변수를 베이즈 확률구조로 선택하는 방식
++ TPE
+    + 기대향상(EI)은 어떤 매개변수로 모델의 점수를 계산 했을때 점수 계선량의 기댓값을 지금까지의 탐색 이력에 추정한 값이다.
+    + TPE(Tree-structured Parzen Estimator)는 기대 향샹의 계산에 필요한 $P(y|x, D_{n})$을 구하는 방법의 하나이다
+    + 기대향상 수식
+    $$EI_{D_{n}}(x) = (\gamma + \frac {g(x|D_{n})} {l(x|D_{n})}(1-\gamma))^{-1} \left \{{\gamma y^* - \int_{-\infty}^{y^*}yP(y|D_{n})dy}  \right \}$$
 
 ## BenchMark
 ### Tabular-learning
