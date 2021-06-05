@@ -37,8 +37,9 @@
 + TPE
     + 기대향상(EI)은 어떤 매개변수로 모델의 점수를 계산 했을때 점수 계선량의 기댓값을 지금까지의 탐색 이력에 추정한 값이다.
     + TPE(Tree-structured Parzen Estimator)는 기대 향샹의 계산에 필요한 ![CodeCogsEqn (1)](https://user-images.githubusercontent.com/46340424/120889562-c590c700-c638-11eb-9fbf-d127f4d42e71.gif)을 구하는 하나의 방법이다
+
     + 기대향상 수식
-        ![CodeCogsEqn](https://user-images.githubusercontent.com/46340424/120889548-b01b9d00-c638-11eb-9208-ecca8f311832.gif)
+    ![CodeCogsEqn](https://user-images.githubusercontent.com/46340424/120889548-b01b9d00-c638-11eb-9208-ecca8f311832.gif)
 
 
 ## BenchMark
