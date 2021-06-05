@@ -19,7 +19,7 @@
 
 ### Feature Engineering
 ##### meta data에 관하여 GBDT 모델을 사용하기 위해 Feature Engineering을 수행
-+ sex_enc: 성별을 이진화
++ sex_enc: 성별을 이진화 -> 도메인 지식을 활용하여 학습에서 제외 (예측 성능 향상)
 + age_enc: 나이를 구간별로 나누어 label encoding함
 + age_approx_mean_enc: age_enc를 mean_encoding 함
 + anatom_enc: anatom_site_general_challenge를 label encoding함
@@ -38,11 +38,50 @@
     + 기대향상(EI)은 어떤 매개변수로 모델의 점수를 계산 했을때 점수 계선량의 기댓값을 지금까지의 탐색 이력에 추정한 값이다.
     + TPE(Tree-structured Parzen Estimator)는 기대 향샹의 계산에 필요한 ![CodeCogsEqn (1)](https://user-images.githubusercontent.com/46340424/120889562-c590c700-c638-11eb-9fbf-d127f4d42e71.gif)을 구하는 하나의 방법이다
 
-    + 기대향상 수식
-
+    + 기대향상 수식 및 코드 구현
         ![CodeCogsEqn](https://user-images.githubusercontent.com/46340424/120889548-b01b9d00-c638-11eb-9208-ecca8f311832.gif)
+        ```python
+        from optuna.samplers import TPESampler
+        import optuna
 
+        class BayesianOptimizer:
+            def __init__(self, objective_function: object):
+                self.objective_function = objective_function
 
+            def build_study(self, trials: int, verbose: bool = False):
+                sampler = TPESampler(seed=42)
+                study = optuna.create_study(
+                    study_name="parameter_opt",
+                    direction="maximize",
+                    sampler=sampler,
+                )
+                study.optimize(self.objective_function, n_trials=trials)
+                if verbose:
+                    self.display_study_statistics(study)
+                return study
+
+            def display_study_statistics(study: optuna.create_study):
+                print("Best Score:", study.best_value)
+                print("Best trial:", study.best_trial.params)
+            ...
+        ```
+    + 실행 방법
+    ```
+    python lgbm_optim.py --fold 10 --params best_lgbm.pkl --trials 350
+    ```
+## Cross-Validation 전략
++ K-Fold의 문제점
+    + K-Fold의 경우 일정한 간격으로 잘라서 사용하여 y라벨링의 값에 불균형한 영향을 줄 수 있다.
+    + 이러한 문제점을 해결하기 위해 나온 것이 stratified kFold이다.
++ Stratified K-Fold는 target에 속성값의 개수를 동일하게 가져감으로써 kfold와 같이 데이터가 한 곳으로 몰리는 경향을 방지한다.
+[K-fold 설명](https://continuous-development.tistory.com/166)
+
+## Train
++ Efficent-Net을 활용하여 이미지 데이터 학습
++ Boosting 모델을 학습 후 앙상블 진행
+```
+python train.py --fold 10
+```
 ## BenchMark
 ### Tabular-learning
 |model|OOF(5-fold)|OOF(10-fold)|

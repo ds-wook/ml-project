@@ -34,7 +34,7 @@ def _main(args: argparse.Namespace):
         "age_approx_mean_enc",
         "age_id_min",
         "age_id_max",
-        "sex_enc",
+        # "sex_enc",
         "anatom_enc",
         "n_images",
         "n_images_enc",
