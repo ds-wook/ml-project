@@ -179,15 +179,19 @@ def display_images(images: np.ndarray, title: Optional[str] = None):
 
 
 # %%
-
+df = train.groupby(["age_approx", "target"])["target"].count().unstack(level="target")
+df.plot(kind="bar", figsize=(12, 10), title="Age Target")
+plt.show()
 # %%
-
-
-listdir("../input/")
+df["age_approx"]
 # %%
-basepath = "../input/siim-isic-melanoma-classification/"
-train_image_path = basepath + "/jpeg/"
-some_files = listdir(train_image_path)[0:5]
-some_files
-
+df = train.groupby(["age_approx", "target"])["target"].agg(["count"])
+df["percent"] = df.groupby(level=0).transform(lambda x: (x / x.sum()))
+df = df.unstack(level="target")
+df["percent"].plot(kind="bar", figsize=(12, 10), title="Age Target")
+plt.show()
+# %%
+df = train.groupby(["age_approx", "target"])["target"].agg(["count"])
+df["percent"] = df.groupby(level=0).transform(lambda x: (x / x.sum()))
+df
 # %%

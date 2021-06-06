@@ -18,10 +18,13 @@
 + target - benign_malignant의 이진화(양성-0, 악성-1)
 
 
-### 전체 과정
+### 학습 과정
+#### Process
 ![전체 프로세스](https://user-images.githubusercontent.com/46340424/120917892-9a67af80-c6ec-11eb-81e6-58152cce2de2.jpg)
+#### 이미지 데이터 전처리
+![전처리 과정](https://user-images.githubusercontent.com/46340424/120921266-d9523100-c6fd-11eb-8738-1ac0c7779d63.jpg)
 
-### Feature Engineering
+#### Feature Engineering
 ##### meta data에 관하여 GBDT 모델을 사용하기 위해 Feature Engineering을 수행
 + sex_enc: 성별을 이진화 -> 도메인 지식을 활용하여 학습에서 제외 (예측 성능 향상)
 + age_enc: 나이를 구간별로 나누어 label encoding함
