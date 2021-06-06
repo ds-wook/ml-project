@@ -96,7 +96,7 @@ user $python train.py --fold [fold 수]
 |LightGBM(after hyper parameter tunning)|0.85360|**0.85864**|
 |CatBoost(before hyper parameter tunning)|0.84594|0.84606|
 |CatBoost(after hyper parameter tunning)|0.84360|0.84485|
-|XGBoost(before hyper parameter tunning)|0.85893|0.86022|
+|XGBoost(before hyper parameter tunning)|0.85893|0.85022|
 |XGBoost(after hyper parameter tunning)|0.84347|0.84705|
 
 ### Image-learning
