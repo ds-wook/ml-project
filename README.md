@@ -14,8 +14,8 @@
 + age_approx - 대략적인 나이
 + anatom_site_general_challenge - 흑색종의 위치
 + diagnosis - 진단명
-+ benign_malignant - 악성인지 음성인지 유무
-+ target - benign_malignant의 이진화(음성-0, 악성-1)
++ benign_malignant - 양성인지 악성인지 유무
++ target - benign_malignant의 이진화(양성-0, 악성-1)
 
 
 ### 전체 과정
