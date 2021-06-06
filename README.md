@@ -17,6 +17,10 @@
 + benign_malignant - 악성인지 음성인지 유무
 + target - benign_malignant의 이진화(음성-0, 악성-1)
 
+
+### 전체 과정
+![전체 프로세스](https://user-images.githubusercontent.com/46340424/120917892-9a67af80-c6ec-11eb-81e6-58152cce2de2.jpg)
+
 ### Feature Engineering
 ##### meta data에 관하여 GBDT 모델을 사용하기 위해 Feature Engineering을 수행
 + sex_enc: 성별을 이진화 -> 도메인 지식을 활용하여 학습에서 제외 (예측 성능 향상)
@@ -69,7 +73,7 @@
         ```
     + 실행 방법
     ```
-    user $ python lgbm_optim.py --fold [fold의 수] --params [params 이름].pkl --trials [반복 수]
+    user $python lgbm_optim.py --fold [fold의 수] --params [params 이름].pkl --trials [반복 수]
     ```
 ## Cross-Validation 전략
 + K-Fold의 문제점
@@ -82,7 +86,7 @@
 + Efficent-Net을 활용하여 이미지 데이터 학습
 + Boosting 모델을 학습 후 앙상블 진행
 ```
-user $ python train.py --fold [fold 수]
+user $python train.py --fold [fold 수]
 ```
 ## BenchMark
 ### Tabular-learning
@@ -108,3 +112,4 @@ user $ python train.py --fold [fold 수]
 |0.7 * Effinet + 0.3 * LGBM|0.90158|
 |0.6 * Effinet + 0.4 * LGBM|0.90056|
 |0.5 * Effinet + 0.5 * LGBM|0.90052|
+![Total_ROC](https://user-images.githubusercontent.com/46340424/120917926-bd925f00-c6ec-11eb-9c39-d85db18175bc.png)

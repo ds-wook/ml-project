@@ -1,24 +1,11 @@
 # %%
-# Regular Imports
-import gc
-import os
 import warnings
 
 import cv2
-import matplotlib.image as mpimg
-import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
-import pydicom  # for DICOM images
 import seaborn as sns
-from IPython.display import display_html
-from PIL import Image
-from skimage.transform import resize
-
-# SKLearn
-from sklearn.preprocessing import LabelEncoder, OneHotEncoder
-
-# from tabulate import tabulate
+from tqdm import tqdm
 
 warnings.filterwarnings("ignore")
 
@@ -41,7 +28,7 @@ image_list = train_df["path_jpeg"].values.tolist()
 image_name = train_df["image_name"].values.tolist()
 
 # %%
-for name, path in zip(image_name, image_list):
+for name, path in tqdm(zip(image_name, image_list)):
     image = cv2.imread(path)
     image = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)
 

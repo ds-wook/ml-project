@@ -34,7 +34,7 @@ def _main(args: argparse.Namespace):
         "age_approx_mean_enc",
         "age_id_min",
         "age_id_max",
-        # "sex_enc",
+        "sex_enc",
         "anatom_enc",
         "n_images",
         "n_images_enc",
@@ -74,19 +74,22 @@ def _main(args: argparse.Namespace):
     ns_probs = [0 for _ in range(len(y_test))]
     ns_fpr, ns_tpr, _ = roc_curve(y_test, ns_probs)
     lgb_fpr, lgb_tpr, _ = roc_curve(y_test, lgb_preds)
+    eff_fpr, eff_tpr, _ = roc_curve(y_test, eff_preds)
+    y_fpr, y_tpr, _ = roc_curve(y_test, y_preds)
     # plot the roc curve for the model
-    plt.plot(ns_fpr, ns_tpr, linestyle="--", label="No Skill")
-    plt.plot(lgb_fpr, lgb_tpr, marker=".", label="LGBM")
-
+    plt.plot(ns_fpr, ns_tpr, linestyle="--", label="standard")
+    plt.plot(lgb_fpr, lgb_tpr, label="LGBM", color="coral")
+    plt.plot(eff_fpr, eff_tpr, label="Efficent-Net", color="aqua")
+    plt.plot(y_fpr, y_tpr, label="Ensemble", color="crimson")
     # axis labels
     plt.xlabel("False Positive Rate")
     plt.ylabel("True Positive Rate")
 
     # show the legend
     plt.legend()
-
+    plt.title("ROC-AUC Curve")
     # show the plot
-    plt.savefig("../../graph/lgbm_ROC.png")
+    plt.savefig("../../graph/Total_ROC.png")
     plt.close()
 
     print("#### Scores ####")
