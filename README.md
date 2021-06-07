@@ -3,6 +3,26 @@
 + 기계학습 프로젝트
 + kaggle의 [IIM-ISIC Melanoma Classification](https://www.kaggle.com/c/siim-isic-melanoma-classification/overview)대회의 데이터를 활용하여 image 데이터와 tabular 데이터를 활용하여 학습을 진행하고자 합니다.
 
+### Requirements
+이 프로젝트에 썼던 라이브러리들:
++ black==20.8b1
++ catboost==0.25
++ isort==5.8.0
++ lightgbm==3.2.0
++ numpy==1.19.5
++ optuna==2.6.0
++ opencv-python==4.5.2.52
++ plotly==4.14.3
++ pandas==1.2.3
++ scikit-image==0.18.1
++ scikit-learn==0.24.1
++ scipy==1.6.2
++ seaborn==0.11.1
++ torch==1.8.1+cu111
++ torchvision==0.9.1+cu111
++ tqdm==4.59.0
++ xgboost==1.3.3
+
 ## 데이터 설명
 ### Files
 + train.csv - 전체 데이터 셋
@@ -77,7 +97,7 @@
         ```
     + 실행 방법
     ```
-    user $python lgbm_optim.py --fold [fold의 수] --params [params 이름].pkl --trials [반복 수] --path [데이터 경로]
+    $ python lgbm_optim.py --fold [fold의 수] --params [params 이름].pkl --trials [반복 수] --path [데이터 경로]
     ```
 ## Cross-Validation 전략
 + K-Fold의 문제점
@@ -90,7 +110,7 @@
 + Efficent-Net을 활용하여 이미지 데이터 학습
 + Boosting 모델을 학습 후 앙상블 진행
 ```
-user $python train.py --fold [fold 수] --path [데이터 경로] --params [최적 파라미터 이름]
+$ python train.py --fold [fold 수] --path [데이터 경로] --params [최적 파라미터 이름]
 ```
 ## BenchMark
 ### Tabular-learning
@@ -119,19 +139,3 @@ user $python train.py --fold [fold 수] --path [데이터 경로] --params [최�
 ![Total_ROC](https://user-images.githubusercontent.com/46340424/120917926-bd925f00-c6ec-11eb-9c39-d85db18175bc.png)
 
 
-### Requirements
-+ black==20.8b1
-+ catboost==0.25
-+ isort==5.8.0
-+ lightgbm==3.2.0
-+ numpy==1.19.5
-+ optuna==2.6.0
-+ opencv-python==4.5.2.52
-+ plotly==4.14.3
-+ pandas==1.2.3
-+ tqdm==4.59.0
-+ scikit-image==0.18.1
-+ scikit-learn==0.24.1
-+ scipy==1.6.2
-+ seaborn==0.11.1
-+ xgboost==1.3.3
