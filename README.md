@@ -95,10 +95,11 @@
                 print("Best trial:", study.best_trial.params)
             ...
         ```
-    + 실행 방법
++ 실행 방법
     ```
     $ python lgbm_optim.py --fold [fold의 수] --params [params 이름].pkl --trials [반복 수] --path [데이터 경로]
     ```
+
 ## Cross-Validation 전략
 + K-Fold의 문제점
     + K-Fold의 경우 일정한 간격으로 잘라서 사용하여 y라벨링의 값에 불균형한 영향을 줄 수 있다.
@@ -109,9 +110,10 @@
 ## Train
 + Efficent-Net을 활용하여 이미지 데이터 학습
 + Boosting 모델을 학습 후 앙상블 진행
-```
-$ python train.py --fold [fold 수] --path [데이터 경로] --params [최적 파라미터 이름]
-```
++ 실행 방법
+    ```
+    $ python train.py --fold [fold 수] --path [데이터 경로] --params [최적 파라미터 이름]
+    ```
 ## BenchMark
 ### Tabular-learning
 |model|OOF(5-fold)|OOF(10-fold)|
