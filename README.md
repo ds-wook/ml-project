@@ -110,6 +110,10 @@
 ## Train
 + Efficent-Net을 활용하여 이미지 데이터 학습
 + Boosting 모델을 학습 후 앙상블 진행
++ 딥러닝의 모델이 하이퍼파라미터 튜닝을 한 LightGBM보다 성능이 좋았으나,둘의 학습 방법은 확연히 다르므로 배깅 기법을 통해 weighted sum을 하여 predict를 함
++ 모델 구성도
+    ![image](https://user-images.githubusercontent.com/46340424/120996460-4b3f7e80-c7c1-11eb-8dfc-6e1837551b2a.png)
+
 + 실행 방법
     ```
     $ python train.py --fold [fold 수] --path [데이터 경로] --params [최적 파라미터 이름]

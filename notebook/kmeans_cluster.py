@@ -322,7 +322,7 @@ ax2.set_title("Silhoutte")
 plt.show()
 # %%
 
-num_clusters = 3
+num_clusters = 5
 
 kmeans = KMeans(n_clusters=num_clusters, random_state=0)
 
@@ -368,7 +368,7 @@ fig.update_yaxes(title_text="Image mean", row=1, col=1)
 fig.update_xaxes(title_text="Image std", row=1, col=2)
 fig.update_yaxes(title_text="Image mean", row=1, col=2)
 
-fig.update_layout(height=425, width=850, showlegend=False)
+fig.update_layout(height=425, width=425, showlegend=False)
 fig.show()
 
 # %%

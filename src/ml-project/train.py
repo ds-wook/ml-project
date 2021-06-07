@@ -57,9 +57,9 @@ def _main(args: argparse.Namespace):
     lgb_oof, lgb_preds = stratified_kfold_lgbm(
         lgb_params, args.fold, X_train, y_train, X_test, 100
     )
-    eff_preds = pd.read_csv("../../submit/bright_submission.csv")["target"]
+    eff_preds = pd.read_csv("../../submit/gray_submission.csv")["target"]
 
-    y_preds = 0.6 * eff_preds + 0.4 * lgb_preds
+    y_preds = 0.5 * eff_preds + 0.5 * lgb_preds
 
     # X_test_scale = StandardScaler().fit_transform(X_test.values)
     # pca = PCA(n_components=2)
