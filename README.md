@@ -1,5 +1,6 @@
 # ml-project
-+ 기계학습 1학기 프로젝트
+[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
++ 기계학습 프로젝트
 + kaggle의 [IIM-ISIC Melanoma Classification](https://www.kaggle.com/c/siim-isic-melanoma-classification/overview)대회의 데이터를 활용하여 image 데이터와 tabular 데이터를 활용하여 학습을 진행하고자 합니다.
 
 ## 데이터 설명
@@ -26,7 +27,7 @@
 
 #### Feature Engineering
 ##### meta data에 관하여 GBDT 모델을 사용하기 위해 Feature Engineering을 수행
-+ sex_enc: 성별을 이진화 -> 도메인 지식을 활용하여 학습에서 제외 (예측 성능 향상)
++ sex_enc: 성별을 이진화
 + age_enc: 나이를 구간별로 나누어 label encoding함
 + age_approx_mean_enc: age_enc를 mean_encoding 함
 + anatom_enc: anatom_site_general_challenge를 label encoding함
@@ -116,3 +117,20 @@ user $python train.py --fold [fold 수]
 |0.6 * Effinet + 0.4 * LGBM|0.90056|
 |0.5 * Effinet + 0.5 * LGBM|0.90052|
 ![Total_ROC](https://user-images.githubusercontent.com/46340424/120917926-bd925f00-c6ec-11eb-9c39-d85db18175bc.png)
+
+
+### Requirements
++ black==20.8b1
++ catboost==0.25
++ lightgbm==3.2.0
++ numpy==1.19.5
++ optuna==2.6.0
++ opencv-python==4.5.2.52
++ plotly==4.14.3
++ pandas==1.2.3
++ tqdm==4.59.0
++ scikit-image==0.18.1
++ scikit-learn==0.24.1
++ scipy==1.6.2
++ seaborn==0.11.1
++ xgboost==1.3.3
