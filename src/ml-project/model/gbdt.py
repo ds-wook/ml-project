@@ -42,9 +42,9 @@ def stratified_kfold_lgbm(
         lgb_oof[valid_idx] = model.predict_proba(X_valid)[:, 1]
         lgb_preds += model.predict_proba(X_test)[:, 1] / n_fold
 
-    # fig, ax = plt.subplots(figsize=(20, 14))
-    # lgbm.plot_importance(model, ax=ax, max_num_features=len(X_test.columns))
-    # plt.savefig("../../graph/lgbm_import.png")
+    fig, ax = plt.subplots(figsize=(20, 14))
+    lgbm.plot_importance(model, ax=ax, max_num_features=len(X_test.columns))
+    plt.savefig("../../graph/lgbm_import.png")
     auc_score = roc_auc_score(y, lgb_oof)
     print(f"ROC-AUC valid score: {auc_score:.5f}")
 

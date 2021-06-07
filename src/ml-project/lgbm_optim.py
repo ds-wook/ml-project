@@ -12,12 +12,15 @@ def define_argparser():
     parse.add_argument("--fold", type=int, default=10)
     parse.add_argument("--trials", type=int, default=360)
     parse.add_argument("--params", type=str, default="params.pkl")
+    parse.add_argument(
+        "--path", type=str, default="../../input/siim-isic-melanoma-classification/"
+    )
     args = parse.parse_args()
     return args
 
 
 def _main(args: argparse.Namespace):
-    path = "../../input/siim-isic-melanoma-classification/"
+    path = args.path
     train = load_dataset(path)
 
     features = [
@@ -26,7 +29,7 @@ def _main(args: argparse.Namespace):
         "age_approx_mean_enc",
         "age_id_min",
         "age_id_max",
-        # "sex_enc",
+        "sex_enc",
         "anatom_enc",
         "n_images",
         "n_images_enc",
