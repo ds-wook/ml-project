@@ -122,6 +122,7 @@ user $python train.py --fold [fold 수]
 ### Requirements
 + black==20.8b1
 + catboost==0.25
++ isort==5.8.0
 + lightgbm==3.2.0
 + numpy==1.19.5
 + optuna==2.6.0
