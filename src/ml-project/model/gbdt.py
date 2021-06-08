@@ -1,6 +1,5 @@
 from typing import Dict, List, Tuple, Union
 
-import lightgbm as lgbm
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
@@ -30,7 +29,7 @@ def stratified_kfold_lgbm(
     for fold, (train_idx, valid_idx) in enumerate(splits):
         X_train, X_valid = X.iloc[train_idx], X.iloc[valid_idx]
         y_train, y_valid = y.iloc[train_idx], y.iloc[valid_idx]
-        model = LGBMClassifier(**params)
+
         model = LGBMClassifier(**params)
         model.fit(
             X_train,
@@ -42,9 +41,6 @@ def stratified_kfold_lgbm(
         lgb_oof[valid_idx] = model.predict_proba(X_valid)[:, 1]
         lgb_preds += model.predict_proba(X_test)[:, 1] / n_fold
 
-    fig, ax = plt.subplots(figsize=(20, 14))
-    lgbm.plot_importance(model, ax=ax, max_num_features=len(X_test.columns))
-    plt.savefig("../../graph/lgbm_import.png")
     auc_score = roc_auc_score(y, lgb_oof)
     print(f"ROC-AUC valid score: {auc_score:.5f}")
 

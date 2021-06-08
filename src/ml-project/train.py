@@ -1,17 +1,20 @@
 import argparse
 import warnings
 
-import matplotlib.pyplot as plt
-import numpy as np
+# import matplotlib.pyplot as plt
+# import numpy as np
 import pandas as pd
-import seaborn as sns
-from sklearn.decomposition import PCA
-from sklearn.metrics import roc_auc_score, roc_curve
+
+# import seaborn as sns
+# from sklearn.decomposition import PCA
+from sklearn.metrics import roc_auc_score  # roc_curve
 from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import StandardScaler
 
 from data.dataset import load_dataset
 from model.gbdt import stratified_kfold_lgbm
+
+# from sklearn.preprocessing import StandardScaler
+
 
 warnings.filterwarnings("ignore")
 
